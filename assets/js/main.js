@@ -415,6 +415,15 @@ function configureNexPlansCarousel() {
     }
 
     let currentIndex = 0;
+    let autoplayTimer = null;
+    let resumeAutoplayTimer = null;
+    let scrollSyncTimer = null;
+
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+
+    function isMobilePlansCarousel() {
+        return mobileQuery.matches;
+    }
 
     function getVisibleCards() {
         if (window.innerWidth <= 840) {
@@ -442,27 +451,188 @@ function configureNexPlansCarousel() {
         return Math.max(0, cards.length - visibleCards);
     }
 
-    function updateCarousel() {
+    function clampCurrentIndex() {
+        const maxIndex = getMaxIndex();
+
+        currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+    }
+
+    function updateButtons() {
+        const maxIndex = getMaxIndex();
+
+        if (isMobilePlansCarousel()) {
+            prevButton.disabled = false;
+            nextButton.disabled = false;
+            prevButton.style.opacity = "1";
+            nextButton.style.opacity = "1";
+            return;
+        }
+
+        prevButton.disabled = currentIndex <= 0;
+        nextButton.disabled = currentIndex >= maxIndex;
+
+        prevButton.style.opacity = currentIndex <= 0 ? "0.45" : "1";
+        nextButton.style.opacity = currentIndex >= maxIndex ? "0.45" : "1";
+    }
+
+    function scrollMobileToCurrentCard(behavior = "smooth") {
+        const step = getCardStep();
+
+        viewport.scrollTo({
+            left: currentIndex * step,
+            behavior
+        });
+    }
+
+    function updateCarousel(options = {}) {
+        const behavior = options.behavior || "smooth";
+
+        clampCurrentIndex();
+
+        if (isMobilePlansCarousel()) {
+            track.style.transform = "";
+            scrollMobileToCurrentCard(behavior);
+            updateButtons();
+            return;
+        }
+
         const step = getCardStep();
         const translateX = currentIndex * step;
 
         track.style.transform = `translate3d(-${translateX}px, 0, 0)`;
-
-        prevButton.disabled = currentIndex <= 0;
-        nextButton.disabled = currentIndex >= getMaxIndex();
-
-        prevButton.style.opacity = currentIndex <= 0 ? "0.45" : "1";
-        nextButton.style.opacity = currentIndex >= getMaxIndex() ? "0.45" : "1";
+        updateButtons();
     }
 
-    prevButton.addEventListener("click", () => {
+    function stopMobileAutoplay() {
+        if (autoplayTimer) {
+            window.clearInterval(autoplayTimer);
+            autoplayTimer = null;
+        }
+    }
+
+    function startMobileAutoplay() {
+        stopMobileAutoplay();
+
+        if (
+            !isMobilePlansCarousel() ||
+            cards.length <= 1 ||
+            document.hidden
+        ) {
+            return;
+        }
+
+        autoplayTimer = window.setInterval(() => {
+            if (!isMobilePlansCarousel()) {
+                stopMobileAutoplay();
+                return;
+            }
+
+            const maxIndex = getMaxIndex();
+
+            currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+            updateCarousel({ behavior: "smooth" });
+        }, 3600);
+    }
+
+    function pauseMobileAutoplay(delay = 5200) {
+        stopMobileAutoplay();
+        window.clearTimeout(resumeAutoplayTimer);
+
+        if (!isMobilePlansCarousel()) {
+            return;
+        }
+
+        resumeAutoplayTimer = window.setTimeout(() => {
+            startMobileAutoplay();
+        }, delay);
+    }
+
+    function syncMobileIndexFromScroll() {
+        if (!isMobilePlansCarousel()) {
+            return;
+        }
+
+        window.clearTimeout(scrollSyncTimer);
+
+        scrollSyncTimer = window.setTimeout(() => {
+            const step = getCardStep();
+
+            if (!step) {
+                return;
+            }
+
+            currentIndex = Math.round(viewport.scrollLeft / step);
+            clampCurrentIndex();
+            updateButtons();
+        }, 90);
+    }
+
+    function goToPreviousCard() {
+        pauseMobileAutoplay();
+
+        if (isMobilePlansCarousel()) {
+            currentIndex = currentIndex <= 0 ? getMaxIndex() : currentIndex - 1;
+            updateCarousel({ behavior: "smooth" });
+            return;
+        }
+
         currentIndex = Math.max(0, currentIndex - 1);
-        updateCarousel();
+        updateCarousel({ behavior: "smooth" });
+    }
+
+    function goToNextCard() {
+        pauseMobileAutoplay();
+
+        if (isMobilePlansCarousel()) {
+            const maxIndex = getMaxIndex();
+
+            currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+            updateCarousel({ behavior: "smooth" });
+            return;
+        }
+
+        currentIndex = Math.min(getMaxIndex(), currentIndex + 1);
+        updateCarousel({ behavior: "smooth" });
+    }
+
+    prevButton.addEventListener("click", goToPreviousCard);
+    nextButton.addEventListener("click", goToNextCard);
+
+    viewport.addEventListener(
+        "pointerdown",
+        () => {
+            pauseMobileAutoplay();
+        },
+        { passive: true }
+    );
+
+    viewport.addEventListener(
+        "touchstart",
+        () => {
+            pauseMobileAutoplay();
+        },
+        { passive: true }
+    );
+
+    viewport.addEventListener(
+        "wheel",
+        () => {
+            pauseMobileAutoplay();
+        },
+        { passive: true }
+    );
+
+    viewport.addEventListener("scroll", syncMobileIndexFromScroll, {
+        passive: true
     });
 
-    nextButton.addEventListener("click", () => {
-        currentIndex = Math.min(getMaxIndex(), currentIndex + 1);
-        updateCarousel();
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            stopMobileAutoplay();
+            return;
+        }
+
+        startMobileAutoplay();
     });
 
     window.addEventListener("resize", () => {
@@ -472,10 +642,41 @@ function configureNexPlansCarousel() {
             currentIndex = maxIndex;
         }
 
-        updateCarousel();
+        updateCarousel({ behavior: "auto" });
+
+        if (isMobilePlansCarousel()) {
+            startMobileAutoplay();
+        } else {
+            stopMobileAutoplay();
+        }
     });
 
-    updateCarousel();
+    if (typeof mobileQuery.addEventListener === "function") {
+        mobileQuery.addEventListener("change", () => {
+            currentIndex = 0;
+            updateCarousel({ behavior: "auto" });
+
+            if (isMobilePlansCarousel()) {
+                startMobileAutoplay();
+            } else {
+                stopMobileAutoplay();
+            }
+        });
+    } else if (typeof mobileQuery.addListener === "function") {
+        mobileQuery.addListener(() => {
+            currentIndex = 0;
+            updateCarousel({ behavior: "auto" });
+
+            if (isMobilePlansCarousel()) {
+                startMobileAutoplay();
+            } else {
+                stopMobileAutoplay();
+            }
+        });
+    }
+
+    updateCarousel({ behavior: "auto" });
+    startMobileAutoplay();
 }
 
 function renderContractApps() {
