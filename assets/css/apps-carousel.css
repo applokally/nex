@@ -1,0 +1,378 @@
+/* =========================================================
+   ATL NEX — CARROSSEL DE APPS GRÁTIS
+   Arquivo completo: assets/css/apps-carousel.css
+   Versão ajustada: textos e bloco centralizados
+   ========================================================= */
+
+.free-apps {
+    position: relative;
+    width: 100%;
+    padding: 76px 0 58px;
+    overflow: hidden;
+    color: #ffffff;
+    text-align: center;
+    background:
+        radial-gradient(
+            circle at 50% -20%,
+            rgba(99, 226, 255, 0.28),
+            transparent 40%
+        ),
+        linear-gradient(
+            180deg,
+            rgb(9, 146, 222) 0%,
+            rgb(5, 108, 202) 58%,
+            rgb(5, 84, 179) 100%
+        );
+}
+
+.free-apps::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px
+        );
+    background-size: 48px 48px;
+}
+
+.free-apps__container {
+    position: relative;
+    z-index: 1;
+    width: min(calc(100% - 48px), 1240px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.free-apps__title {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto 42px;
+    color: #ffffff;
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: clamp(2rem, 3vw, 3.35rem);
+    line-height: 1.08;
+    font-weight: 400;
+    letter-spacing: -0.045em;
+    text-align: center;
+    text-shadow: 0 5px 20px rgba(0, 49, 130, 0.22);
+}
+
+.free-apps__carousel {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    align-items: center;
+    gap: 12px;
+}
+
+.free-apps__viewport {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    text-align: center;
+}
+
+.free-apps__viewport.is-dragging {
+    cursor: grabbing;
+}
+
+.free-apps__track {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 26px;
+    width: max-content;
+    min-width: max-content;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Todos os ícones possuem exatamente o mesmo espaço */
+
+.free-app,
+.free-app--large {
+    flex: 0 0 146px;
+    width: 146px;
+    min-width: 146px;
+    max-width: 146px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.free-app__image-wrap,
+.free-app--large .free-app__image-wrap {
+    width: 146px;
+    height: 112px;
+    min-height: 112px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.free-app__image,
+.free-app--large .free-app__image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 104px;
+    max-height: 104px;
+    object-fit: contain;
+    object-position: center;
+    pointer-events: none;
+    filter:
+        drop-shadow(
+            0 11px 16px rgba(0, 42, 123, 0.24)
+        )
+        drop-shadow(
+            0 0 12px rgba(127, 236, 255, 0.14)
+        );
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+.free-app:hover .free-app__image {
+    transform: translateY(-4px) scale(1.035);
+    filter:
+        drop-shadow(
+            0 15px 20px rgba(0, 42, 123, 0.30)
+        )
+        drop-shadow(
+            0 0 20px rgba(127, 236, 255, 0.34)
+        );
+}
+
+.free-app__price-old {
+    width: 100%;
+    margin-top: 13px;
+    color: rgb(255, 76, 92);
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.15;
+    font-weight: 700;
+    white-space: nowrap;
+    text-align: center;
+    text-decoration-line: line-through;
+    text-decoration-color: rgb(255, 28, 54);
+    text-decoration-thickness: 3px;
+    text-decoration-skip-ink: none;
+    text-shadow: 0 3px 12px rgba(0, 43, 120, 0.22);
+}
+
+.free-app__price-free {
+    width: 100%;
+    margin-top: 8px;
+    color: #ffffff;
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: 1.52rem;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.015em;
+    white-space: nowrap;
+    text-align: center;
+    text-shadow:
+        0 4px 14px rgba(0, 48, 130, 0.30),
+        0 0 18px rgba(128, 237, 255, 0.24);
+}
+
+.free-apps__arrow {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    background: transparent;
+    box-shadow: none;
+    transition:
+        color 0.22s ease,
+        transform 0.22s ease,
+        filter 0.22s ease;
+}
+
+.free-apps__arrow svg {
+    width: 29px;
+    height: 29px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.free-apps__arrow:hover,
+.free-apps__arrow:focus-visible {
+    color: rgb(142, 241, 255);
+    transform: scale(1.12);
+    filter:
+        drop-shadow(
+            0 0 12px rgba(127, 236, 255, 0.68)
+        );
+    outline: none;
+}
+
+.free-apps__text {
+    width: 100%;
+    max-width: 920px;
+    margin: 42px auto 0;
+    color: rgba(241, 252, 255, 0.84);
+    font-family: "Manrope", Arial, sans-serif;
+    font-size: clamp(0.88rem, 1.1vw, 1rem);
+    line-height: 1.7;
+    font-weight: 400;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .free-apps {
+        padding: 64px 0 52px;
+    }
+
+    .free-apps__container {
+        width: min(calc(100% - 30px), 760px);
+    }
+
+    .free-apps__carousel {
+        width: 100%;
+        grid-template-columns:
+            36px minmax(0, 1fr) 36px;
+        gap: 6px;
+    }
+
+    .free-apps__track {
+        gap: 20px;
+    }
+
+    .free-app,
+    .free-app--large {
+        flex-basis: 128px;
+        width: 128px;
+        min-width: 128px;
+        max-width: 128px;
+    }
+
+    .free-app__image-wrap,
+    .free-app--large .free-app__image-wrap {
+        width: 128px;
+        height: 100px;
+        min-height: 100px;
+    }
+
+    .free-app__image,
+    .free-app--large .free-app__image {
+        max-width: 92px;
+        max-height: 92px;
+    }
+
+    .free-app__price-old {
+        font-size: 1rem;
+    }
+
+    .free-app__price-free {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 580px) {
+    .free-apps {
+        padding: 52px 0 44px;
+    }
+
+    .free-apps__title {
+        max-width: 100%;
+        margin: 0 auto 30px;
+        font-size: clamp(1.7rem, 7.5vw, 2.25rem);
+        text-align: center;
+    }
+
+    .free-apps__carousel {
+        width: 100%;
+        grid-template-columns:
+            30px minmax(0, 1fr) 30px;
+        gap: 2px;
+    }
+
+    .free-apps__track {
+        gap: 15px;
+    }
+
+    .free-app,
+    .free-app--large {
+        flex-basis: 110px;
+        width: 110px;
+        min-width: 110px;
+        max-width: 110px;
+    }
+
+    .free-app__image-wrap,
+    .free-app--large .free-app__image-wrap {
+        width: 110px;
+        height: 90px;
+        min-height: 90px;
+    }
+
+    .free-app__image,
+    .free-app--large .free-app__image {
+        max-width: 82px;
+        max-height: 82px;
+    }
+
+    .free-app__price-old {
+        margin-top: 9px;
+        font-size: 0.9rem;
+        text-decoration-thickness: 2px;
+    }
+
+    .free-app__price-free {
+        margin-top: 6px;
+        font-size: 1.22rem;
+    }
+
+    .free-apps__arrow {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+    }
+
+    .free-apps__arrow svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .free-apps__text {
+        max-width: 100%;
+        margin: 32px auto 0;
+        font-size: 0.82rem;
+        line-height: 1.65;
+        text-align: center;
+    }
+}

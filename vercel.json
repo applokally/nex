@@ -1,0 +1,48 @@
+{
+  "rewrites": [
+    {
+      "source": "/planos",
+      "destination": "/planos.html"
+    },
+    {
+      "source": "/esim",
+      "destination": "/esim.html"
+    },
+    {
+      "source": "/portabilidade",
+      "destination": "/portabilidade.html"
+    },
+    {
+      "source": "/beneficios",
+      "destination": "/beneficios.html"
+    },
+    {
+      "source": "/contratacao",
+      "destination": "/contratacao.html"
+    },
+    {
+      "source": "/:consultor([a-z0-9-]+)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/:consultor([a-z0-9-]+)/planos",
+      "destination": "/planos.html"
+    },
+    {
+      "source": "/:consultor([a-z0-9-]+)/esim",
+      "destination": "/esim.html"
+    },
+    {
+      "source": "/:consultor([a-z0-9-]+)/portabilidade",
+      "destination": "/portabilidade.html"
+    },
+    {
+      "source": "/:consultor([a-z0-9-]+)/beneficios",
+      "destination": "/beneficios.html"
+    },
+    {
+      "source": "/:consultor([a-z0-9-]+)/contratacao",
+      "destination": "/contratacao.html"
+    }
+  ]
+}

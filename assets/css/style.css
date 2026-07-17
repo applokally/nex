@@ -1,0 +1,2468 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+    --bg: #075bb9;
+    --bg-soft: #0370cc;
+    --panel: rgba(5, 94, 185, 0.78);
+    --panel-strong: #0758ae;
+    --line: rgba(205, 247, 255, 0.30);
+    --line-strong: rgba(220, 251, 255, 0.62);
+    --text: #ffffff;
+    --muted: #d6f3ff;
+    --cyan: #32cbf9;
+    --cyan-light: #7eeaff;
+    --cyan-strong: #16b5f2;
+    --blue: #0d5bb9;
+    --green: #46efb5;
+    --warning: #ffe08a;
+    --shadow: 0 28px 75px rgba(0, 54, 138, 0.28);
+    --radius: 28px;
+    --container: 1180px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text);
+    font-family: "Manrope", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 72% 8%, rgba(50, 203, 249, 0.38), transparent 34%),
+        radial-gradient(circle at 8% 34%, rgba(8, 79, 184, 0.44), transparent 34%),
+        linear-gradient(
+            180deg,
+            rgb(13, 91, 185) 0%,
+            rgb(3, 112, 204) 42%,
+            rgb(11, 149, 227) 100%
+        );
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 42px 42px;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+.container {
+    width: min(calc(100% - 40px), var(--container));
+    margin: auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid rgba(215, 249, 255, 0.22);
+    background: rgba(4, 79, 170, 0.82);
+    box-shadow: 0 10px 35px rgba(0, 53, 141, 0.18);
+    backdrop-filter: blur(18px);
+}
+
+.header-inner {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.brand {
+    width: auto;
+    min-width: 214px;
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    flex-shrink: 0;
+}
+
+.brand__mark {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+    object-fit: contain;
+    filter:
+        drop-shadow(0 0 10px rgba(126, 234, 255, 0.36))
+        drop-shadow(0 7px 16px rgba(0, 65, 150, 0.22));
+}
+
+.brand__name {
+    color: #ffffff;
+    font-size: 1.82rem;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: 0.065em;
+    white-space: nowrap;
+    text-shadow: 0 0 18px rgba(126, 234, 255, 0.20);
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.main-nav a {
+    position: relative;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.main-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: -9px;
+    height: 2px;
+    background: #7eeaff;
+    box-shadow: 0 0 16px rgba(126, 234, 255, 0.9);
+    transition: 0.25s;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: #ffffff;
+    text-shadow: 0 0 18px rgba(104, 225, 255, 0.72);
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    right: 0;
+}
+
+.header-cta,
+.btn {
+    min-height: 52px;
+    padding: 0 24px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 800;
+    transition: 0.22s;
+}
+
+.header-cta,
+.btn--primary {
+    color: #053e86;
+    background: linear-gradient(
+        135deg,
+        rgb(232, 253, 255),
+        rgb(126, 234, 255) 52%,
+        rgb(50, 203, 249)
+    );
+    box-shadow:
+        0 15px 36px rgba(0, 66, 164, 0.24),
+        0 0 25px rgba(126, 234, 255, 0.24);
+}
+
+.header-cta:hover,
+.btn:hover,
+.btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 18px 42px rgba(0, 64, 161, 0.32),
+        0 0 34px rgba(126, 234, 255, 0.54);
+}
+
+.btn--secondary {
+    color: #ffffff;
+    border-color: rgba(215, 249, 255, 0.55);
+    background: rgba(5, 81, 173, 0.48);
+}
+
+.btn--secondary:hover {
+    background: rgba(12, 128, 216, 0.62);
+    box-shadow: 0 14px 38px rgba(0, 77, 175, 0.24);
+}
+
+.menu-toggle {
+    display: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    border: 1px solid rgba(220, 251, 255, 0.36);
+    background: rgba(5, 88, 181, 0.72);
+    color: #ffffff;
+}
+
+.menu-toggle span,
+.menu-toggle::before,
+.menu-toggle::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: currentColor;
+    margin: 4px auto;
+}
+
+/* =========================================================
+   HERO CONTROLE
+   ========================================================= */
+
+.controle-hero {
+    position: relative;
+    min-height: clamp(590px, 39vw, 790px);
+    display: flex;
+    align-items: center;
+    isolation: isolate;
+    overflow: hidden;
+    background: rgb(3, 112, 204);
+}
+
+.controle-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 70, 157, 0.20) 0%,
+            rgba(3, 91, 185, 0.04) 48%,
+            transparent 72%
+        );
+}
+
+.controle-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    display: block;
+}
+
+.controle-hero__media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.controle-hero__container {
+    width: min(calc(100% - 64px), 1460px);
+    margin-inline: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.controle-hero__content {
+    width: min(61%, 900px);
+    padding: 66px 0 58px;
+}
+
+.controle-hero__title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(2.15rem, 2.75vw, 3.55rem);
+    line-height: 1.12;
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    text-shadow:
+        0 4px 19px rgba(0, 44, 125, 0.28),
+        0 0 28px rgba(58, 211, 250, 0.12);
+}
+
+.controle-hero__title span {
+    display: block;
+    white-space: nowrap;
+}
+
+.controle-hero__title span:last-child {
+    margin-top: 5px;
+}
+
+.controle-hero__offer {
+    width: min(100%, 650px);
+    max-height: 230px;
+    margin-top: 30px;
+    object-fit: contain;
+    object-position: left center;
+    filter:
+        drop-shadow(0 18px 26px rgba(0, 48, 127, 0.22))
+        drop-shadow(0 0 22px rgba(91, 226, 255, 0.22));
+    transition:
+        transform 0.28s ease,
+        filter 0.28s ease;
+}
+
+.controle-hero__offer:hover {
+    transform: translateY(-4px) scale(1.012);
+    filter:
+        drop-shadow(0 22px 32px rgba(0, 48, 127, 0.30))
+        drop-shadow(0 0 32px rgba(108, 232, 255, 0.50));
+}
+
+.controle-hero__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.controle-hero__button {
+    min-width: 176px;
+    min-height: 50px;
+}
+
+.controle-hero__button--plans {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.68);
+    background: rgba(4, 84, 174, 0.36);
+    box-shadow: 0 12px 30px rgba(0, 62, 151, 0.18);
+}
+
+.controle-hero__button--plans:hover {
+    border-color: #ffffff;
+    background: rgba(7, 105, 200, 0.58);
+    box-shadow:
+        0 16px 34px rgba(0, 60, 148, 0.25),
+        0 0 25px rgba(126, 234, 255, 0.34);
+}
+
+.controle-hero__button--contract {
+    box-shadow:
+        0 15px 34px rgba(0, 60, 151, 0.24),
+        0 0 24px rgba(126, 234, 255, 0.26);
+}
+
+/* =========================================================
+   CARROSSEL APPS GRÁTIS
+   ========================================================= */
+
+.free-apps {
+    padding: 88px 0 76px;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(126, 234, 255, 0.25), transparent 36%),
+        linear-gradient(180deg, #0b95e3 0%, #075bb9 100%);
+}
+
+.free-apps__container {
+    width: min(calc(100% - 40px), 1260px);
+    margin-inline: auto;
+}
+
+.free-apps__title {
+    max-width: 980px;
+    margin: 0 auto 44px;
+    color: #ffffff;
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.055em;
+    text-align: center;
+}
+
+.free-apps__carousel {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    align-items: center;
+    gap: 16px;
+}
+
+.free-apps__viewport {
+    min-width: 0;
+    overflow: hidden;
+    cursor: grab;
+}
+
+.free-apps__viewport.is-dragging {
+    cursor: grabbing;
+}
+
+.free-apps__track {
+    display: flex;
+    align-items: flex-end;
+    gap: 26px;
+    width: max-content;
+    min-width: max-content;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+}
+
+.free-app {
+    width: 148px;
+    min-width: 148px;
+    flex: 0 0 148px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.free-app__image-wrap {
+    width: 148px;
+    height: 112px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.free-app__image {
+    width: auto;
+    height: auto;
+    max-width: 108px;
+    max-height: 108px;
+    object-fit: contain;
+    pointer-events: none;
+    filter: drop-shadow(0 12px 18px rgba(0, 39, 121, 0.26));
+}
+
+.free-app__price-old {
+    margin-top: 14px;
+    color: #ff5f73;
+    font-size: 1.08rem;
+    line-height: 1.15;
+    font-weight: 700;
+    text-decoration: line-through;
+    text-decoration-color: #ff1f3d;
+    text-decoration-thickness: 3px;
+    white-space: nowrap;
+}
+
+.free-app__price-free {
+    margin-top: 8px;
+    color: #ffffff;
+    font-size: 1.52rem;
+    line-height: 1;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.free-apps__text {
+    max-width: 920px;
+    margin: 42px auto 0;
+    color: rgba(242, 252, 255, 0.84);
+    font-size: 0.96rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.free-apps__arrow,
+.nex-plans__arrow,
+.plan-contract-apps__arrow {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border: 1px solid rgba(220, 251, 255, 0.36);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    background: rgba(4, 73, 158, 0.58);
+    box-shadow: 0 14px 34px rgba(0, 54, 138, 0.18);
+    transition:
+        transform 0.22s ease,
+        background 0.22s ease,
+        opacity 0.22s ease;
+}
+
+.free-apps__arrow svg,
+.nex-plans__arrow svg,
+.plan-contract-apps__arrow svg {
+    width: 27px;
+    height: 27px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.free-apps__arrow:hover,
+.nex-plans__arrow:hover,
+.plan-contract-apps__arrow:hover {
+    transform: scale(1.08);
+    background: rgba(8, 126, 209, 0.82);
+}
+
+/* =========================================================
+   PLANOS ATL NEX
+   ========================================================= */
+
+.nex-plans {
+    position: relative;
+    padding: 94px 0 88px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(126, 234, 255, 0.22), transparent 35%),
+        linear-gradient(180deg, #075bb9 0%, #053e99 100%);
+}
+
+.nex-plans__container {
+    width: min(calc(100% - 40px), 1320px);
+    margin-inline: auto;
+}
+
+.nex-plans__header {
+    max-width: 860px;
+    margin: 0 auto 48px;
+    text-align: center;
+}
+
+.nex-plans__eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #7ff1ff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+}
+
+.nex-plans__title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(2rem, 3.8vw, 3.8rem);
+    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -0.055em;
+}
+
+.nex-plans__subtitle {
+    max-width: 760px;
+    margin: 18px auto 0;
+    color: rgba(233, 250, 255, 0.82);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.nex-plans__carousel {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) 52px;
+    align-items: center;
+    gap: 16px;
+}
+
+.nex-plans__viewport {
+    min-width: 0;
+    overflow: hidden;
+    padding: 12px 0 6px;
+    margin: -12px 0 0;
+}
+
+.nex-plans__track {
+    display: flex;
+    align-items: stretch;
+    gap: 22px;
+    transition: transform 0.44s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform;
+}
+
+.nex-plan-card {
+    flex: 0 0 calc((100% - 44px) / 3);
+    min-width: calc((100% - 44px) / 3);
+    min-height: 720px;
+    border: 1px solid rgba(190, 242, 255, 0.28);
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(24, 140, 216, 0.28),
+            rgba(6, 47, 130, 0.83)
+        ),
+        #0752b1;
+    box-shadow: none;
+}
+
+.nex-plan-card--featured {
+    border-color: rgba(98, 237, 255, 0.78);
+    box-shadow: none;
+}
+
+.nex-plan-card__topbar {
+    min-height: 82px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(77, 220, 255, 0.28),
+            rgba(255, 255, 255, 0.08)
+        );
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nex-plan-card--featured .nex-plan-card__topbar {
+    background: linear-gradient(90deg, #ffc33d, #ffda79);
+}
+
+.nex-plan-card--featured .nex-plan-card__badge,
+.nex-plan-card--featured .nex-plan-card__bonus-months {
+    color: #072d70;
+}
+
+.nex-plan-card__badge {
+    color: #ffffff;
+    font-size: 1.50rem;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.nex-plan-card__bonus-months {
+    color: rgba(236, 250, 255, 0.8);
+    font-size: 0.72rem;
+    line-height: 1.35;
+}
+
+.nex-plan-card__content {
+    flex: 1;
+    padding: 24px 21px 23px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nex-plan-card__combo {
+    margin: 0 0 5px;
+    color: rgba(235, 250, 255, 0.86);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.nex-plan-card__gb {
+    margin: 0 0 18px;
+    color: #ffffff;
+    font-size: clamp(2.75rem, 3.3vw, 3.7rem);
+    line-height: 0.95;
+    font-weight: 800;
+    letter-spacing: -0.06em;
+}
+
+.nex-plan-card__benefits {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+    list-style: none;
+}
+
+.nex-plan-card__benefits li {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: rgba(248, 253, 255, 0.94);
+    font-size: 0.92rem;
+    line-height: 1.4;
+}
+
+.nex-plan-card__icon {
+    width: 23px;
+    height: 23px;
+    min-width: 23px;
+    display: grid;
+    place-items: center;
+    color: #7bf0ff;
+}
+
+.nex-plan-card__icon svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+.nex-plan-card__icon--plus {
+    font-size: 1.65rem;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.nex-plan-card__icon--accumulative {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(116, 240, 255, 0.55);
+    border-radius: 50%;
+    color: #7bf0ff;
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.nex-plan-card__svas {
+    margin-top: 20px;
+    padding-top: 17px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nex-plan-card__svas-label {
+    display: block;
+    margin-bottom: 11px;
+    color: rgba(235, 250, 255, 0.84);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.nex-plan-card__svas-icons {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.nex-plan-card__svas-icons img {
+    width: 43px;
+    height: 43px;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 8px 12px rgba(0, 22, 88, 0.28));
+}
+
+.nex-plan-card__price {
+    margin-top: auto;
+    padding-top: 22px;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    color: #78efff;
+}
+
+.nex-plan-card__price-currency {
+    margin-bottom: 6px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.nex-plan-card__price-value {
+    font-size: clamp(2.25rem, 2.8vw, 3rem);
+    line-height: 0.92;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+}
+
+.nex-plan-card__price::after {
+    content: "/mês";
+    margin-bottom: 5px;
+    color: rgba(233, 250, 255, 0.76);
+    font-size: 0.78rem;
+}
+
+.nex-plan-card__cta {
+    width: 100%;
+    min-height: 66px;
+    margin-top: 21px;
+    padding: 13px 20px;
+    border: 0;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    color: #0a4292;
+    background: linear-gradient(180deg, #ffffff, #e9f8ff);
+    box-shadow: 0 8px 18px rgba(0, 24, 92, 0.14);
+    font-weight: 800;
+}
+
+.nex-plan-card__cta img {
+    width: auto;
+    height: 38px;
+    max-width: 155px;
+    object-fit: contain;
+}
+
+/* =========================================================
+   FORMULÁRIO DE CONTRATAÇÃO
+   ========================================================= */
+
+.plan-contract-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.plan-contract-modal.is-open {
+    display: flex;
+}
+
+.plan-contract-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(1, 18, 61, 0.74);
+    backdrop-filter: blur(8px);
+}
+
+.plan-contract-modal__dialog {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 980px);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 34px;
+    border: 1px solid rgba(216, 249, 255, 0.32);
+    border-radius: 30px;
+    background:
+        radial-gradient(circle at top right, rgba(80, 226, 255, 0.28), transparent 35%),
+        linear-gradient(155deg, #0878cf, #06449f 68%, #052f80);
+    box-shadow: 0 34px 100px rgba(0, 20, 82, 0.48);
+}
+
+.plan-contract-modal__close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid rgba(225, 250, 255, 0.32);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    background: rgba(4, 55, 145, 0.48);
+}
+
+.plan-contract-modal__close svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.plan-contract-modal__header {
+    max-width: 760px;
+    padding-right: 52px;
+}
+
+.plan-contract-modal__eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #7ff1ff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+}
+
+.plan-contract-modal__header h2 {
+    margin: 0;
+    font-size: clamp(1.75rem, 3vw, 2.8rem);
+    line-height: 1.06;
+    letter-spacing: -0.04em;
+}
+
+.plan-contract-modal__header p {
+    margin: 13px 0 0;
+    color: rgba(235, 250, 255, 0.84);
+    line-height: 1.65;
+}
+
+.plan-contract-form {
+    margin-top: 28px;
+}
+
+.plan-contract-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.plan-contract-summary > div {
+    min-height: 86px;
+    padding: 17px 18px;
+    border: 1px solid rgba(220, 250, 255, 0.25);
+    border-radius: 18px;
+    background: rgba(4, 53, 140, 0.36);
+}
+
+.plan-contract-summary span,
+.plan-contract-summary strong {
+    display: block;
+}
+
+.plan-contract-summary span {
+    color: rgba(235, 250, 255, 0.72);
+    font-size: 0.78rem;
+}
+
+.plan-contract-summary strong {
+    margin-top: 7px;
+    color: #ffffff;
+    font-size: 1.05rem;
+}
+
+.plan-contract-fieldset {
+    padding: 0;
+    margin: 28px 0 0;
+    border: 0;
+}
+
+.plan-contract-fieldset legend {
+    margin-bottom: 14px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.plan-contract-options {
+    display: grid;
+    gap: 12px;
+}
+
+.plan-contract-options--two {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.plan-contract-option {
+    position: relative;
+    cursor: pointer;
+}
+
+.plan-contract-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.plan-contract-option > span {
+    min-height: 92px;
+    padding: 17px 18px;
+    border: 1px solid rgba(220, 250, 255, 0.25);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(4, 53, 140, 0.36);
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.plan-contract-option input:checked + span {
+    border-color: #70efff;
+    background: rgba(18, 145, 211, 0.54);
+    transform: translateY(-2px);
+}
+
+.plan-contract-option strong,
+.plan-contract-option small {
+    display: block;
+}
+
+.plan-contract-option small {
+    margin-top: 5px;
+    color: rgba(235, 250, 255, 0.74);
+    line-height: 1.45;
+}
+
+.plan-contract-apps {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+    align-items: center;
+    gap: 8px;
+}
+
+.plan-contract-apps__viewport {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+.plan-contract-apps__viewport::-webkit-scrollbar {
+    display: none;
+}
+
+.plan-contract-apps__track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    padding: 4px;
+}
+
+.plan-contract-app {
+    flex: 0 0 118px;
+    width: 118px;
+    min-height: 128px;
+    padding: 13px 10px;
+    border: 1px solid rgba(220, 250, 255, 0.23);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #ffffff;
+    background: rgba(4, 53, 140, 0.36);
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.plan-contract-app.is-selected {
+    border-color: #70efff;
+    background: rgba(18, 145, 211, 0.58);
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(87, 236, 255, 0.18);
+}
+
+.plan-contract-app__image {
+    width: 68px;
+    height: 68px;
+    display: grid;
+    place-items: center;
+}
+
+.plan-contract-app__image img {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+}
+
+.plan-contract-app__name {
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.plan-contract-data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.plan-contract-input--full {
+    grid-column: 1 / -1;
+}
+
+.plan-contract-input span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.plan-contract-input input {
+    width: 100%;
+    height: 54px;
+    padding: 0 16px;
+    border: 1px solid rgba(220, 250, 255, 0.28);
+    border-radius: 15px;
+    outline: none;
+    color: #ffffff;
+    background: rgba(4, 53, 140, 0.36);
+}
+
+.plan-contract-input input::placeholder {
+    color: rgba(235, 250, 255, 0.5);
+}
+
+.plan-contract-input input:focus {
+    border-color: #70efff;
+    box-shadow: 0 0 0 3px rgba(87, 236, 255, 0.12);
+}
+
+.plan-contract-form__notice {
+    margin: 22px 0 0;
+    color: rgba(235, 250, 255, 0.76);
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+.plan-contract-form__error {
+    min-height: 22px;
+    margin: 12px 0 0;
+    color: #ffd1d7;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.plan-contract-form__submit {
+    width: 100%;
+    min-height: 66px;
+    margin-top: 8px;
+    padding: 13px 20px;
+    border: 0;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: #0a4292;
+    background: linear-gradient(180deg, #ffffff, #e9f8ff);
+    box-shadow: 0 14px 26px rgba(0, 25, 93, 0.22);
+    font-weight: 800;
+}
+
+.plan-contract-form__submit img {
+    width: auto;
+    height: 38px;
+    max-width: 160px;
+    object-fit: contain;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+    padding: 26px 0 14px;
+    border-top: 1px solid rgba(215, 249, 255, 0.22);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(4, 89, 181, 0.96),
+            rgba(3, 69, 151, 0.98)
+        );
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+.footer-grid > div:not(:first-child) {
+    display: none;
+}
+
+.footer-grid > div:first-child,
+.footer-main {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 34px;
+    text-align: left;
+}
+
+.footer-brand,
+.footer-brand-main {
+    margin: 0;
+}
+
+.footer-brand {
+    width: 180px;
+    max-width: 180px;
+}
+
+.footer-brand-main {
+    min-width: 230px;
+    justify-content: flex-start;
+}
+
+.footer-brand-main .brand__mark {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+}
+
+.footer-brand-main .brand__name {
+    font-size: 1.72rem;
+}
+
+.footer-copy,
+.footer-copy--center {
+    max-width: none;
+    margin: 0;
+    color: rgba(233, 250, 255, 0.82);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    text-align: left;
+}
+
+.footer-title,
+.footer-links {
+    display: none;
+}
+
+.footer-bottom,
+.footer-bottom--center {
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(127, 234, 255, 0.1);
+    color: rgba(233, 250, 255, 0.72);
+    font-size: 0.78rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    text-align: left;
+}
+
+.footer-bottom span,
+.footer-bottom--center span {
+    width: auto;
+}
+
+.footer-bottom span:last-child,
+.footer-bottom--center span:last-child {
+    text-align: right;
+}
+
+.toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 300;
+    max-width: 340px;
+    padding: 17px 20px;
+    border: 1px solid rgba(127, 234, 255, 0.5);
+    border-radius: 16px;
+    color: #ffffff;
+    background: rgba(5, 25, 43, 0.96);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: 0.25s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: none;
+}
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 1180px) {
+    .controle-hero__container {
+        width: min(calc(100% - 48px), 1120px);
+    }
+
+    .controle-hero__content {
+        width: min(63%, 760px);
+    }
+
+    .controle-hero__title {
+        font-size: clamp(1.85rem, 3.2vw, 2.7rem);
+    }
+
+    .nex-plan-card {
+        flex-basis: calc((100% - 22px) / 2);
+        min-width: calc((100% - 22px) / 2);
+    }
+}
+
+@media (max-width: 980px) {
+    .main-nav,
+    .header-cta {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-nav.open {
+        position: absolute;
+        top: 82px;
+        left: 20px;
+        right: 20px;
+        padding: 20px;
+        display: grid;
+        gap: 18px;
+        border: 1px solid rgba(220, 251, 255, 0.30);
+        border-radius: 20px;
+        background: rgba(4, 73, 158, 0.97);
+        box-shadow: var(--shadow);
+    }
+
+    .brand {
+        min-width: 190px;
+        gap: 10px;
+    }
+
+    .brand__mark {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+    }
+
+    .brand__name {
+        font-size: 1.55rem;
+    }
+
+    .controle-hero__content {
+        width: min(66%, 680px);
+    }
+
+    .controle-hero__title {
+        font-size: clamp(1.6rem, 3.45vw, 2.25rem);
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid > div:first-child {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 840px) {
+    .nex-plans__carousel {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 8px;
+    }
+
+    .nex-plans__arrow {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+    }
+
+    .nex-plan-card {
+        flex-basis: 100%;
+        min-width: 100%;
+        min-height: 670px;
+    }
+}
+
+@media (max-width: 767px) {
+    .controle-hero__content {
+    width: 100%;
+    min-height: inherit;
+    padding: 34px 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+    .controle-hero__container {
+        width: min(calc(100% - 28px), 680px);
+        min-height: inherit;
+        display: flex;
+        align-items: stretch;
+    }
+
+    .controle-hero__content {
+        width: 100%;
+        min-height: inherit;
+        padding: 15px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+    .controle-hero__title {
+        max-width: none;
+        margin: 0 auto;
+        font-size: clamp(0.98rem, 4.25vw, 1.55rem);
+        line-height: 1.16;
+        font-weight: 400;
+        letter-spacing: -0.025em;
+    }
+
+    .controle-hero__title span {
+        white-space: nowrap;
+    }
+
+    .controle-hero__bottom {
+        width: 100%;
+        display: grid;
+        justify-items: center;
+    }
+
+    .controle-hero__offer {
+        width: min(96%, 570px);
+        max-height: 210px;
+        margin: 0 auto;
+        object-position: center;
+    }
+
+    .controle-hero__actions {
+        justify-content: center;
+        gap: 12px;
+        margin-top: 15px;
+    }
+
+    .controle-hero__button {
+        min-width: 150px;
+        min-height: 48px;
+        padding-inline: 20px;
+    }
+
+    .free-apps__carousel {
+        grid-template-columns: 36px minmax(0, 1fr) 36px;
+        gap: 6px;
+    }
+
+    .free-apps__arrow {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+    }
+
+    .free-app {
+        width: 118px;
+        min-width: 118px;
+        flex-basis: 118px;
+    }
+
+    .free-app__image-wrap {
+        width: 118px;
+        height: 96px;
+    }
+
+    .free-app__image {
+        max-width: 88px;
+        max-height: 88px;
+    }
+
+    .plan-contract-modal {
+        padding: 12px;
+    }
+
+    .plan-contract-modal__dialog {
+        max-height: calc(100vh - 24px);
+        padding: 26px 18px;
+        border-radius: 23px;
+    }
+
+    .plan-contract-summary,
+    .plan-contract-options--two,
+    .plan-contract-data-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-contract-input--full {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 580px) {
+    .container,
+    .free-apps__container,
+    .nex-plans__container {
+        width: min(calc(100% - 28px), var(--container));
+    }
+
+    .brand {
+        min-width: 166px;
+        gap: 8px;
+    }
+
+    .brand__mark {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+    }
+
+    .brand__name {
+        font-size: 1.35rem;
+    }
+
+    .free-apps,
+    .nex-plans {
+        padding-top: 58px;
+        padding-bottom: 48px;
+    }
+
+    .free-apps__title,
+    .nex-plans__title {
+        font-size: clamp(1.75rem, 8vw, 2.35rem);
+    }
+
+    .nex-plan-card__content {
+        padding: 21px 17px;
+    }
+
+    .nex-plan-card__cta img {
+        height: 34px;
+        max-width: 138px;
+    }
+
+    .plan-contract-apps {
+        grid-template-columns: 30px minmax(0, 1fr) 30px;
+        gap: 4px;
+    }
+
+    .plan-contract-apps__arrow {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+    }
+
+    .plan-contract-app {
+        flex-basis: 102px;
+        width: 102px;
+        min-height: 118px;
+    }
+
+    .plan-contract-app__image,
+    .plan-contract-app__image img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .plan-contract-form__submit {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .plan-contract-form__submit img {
+        height: 34px;
+        max-width: 145px;
+    }
+
+    .footer-grid > div:first-child,
+    .footer-main {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        row-gap: 14px;
+        text-align: center;
+    }
+
+    .footer-brand {
+        margin: 0 auto;
+    }
+
+    .footer-brand-main {
+        min-width: 0;
+        justify-content: center;
+    }
+
+    .footer-copy,
+    .footer-copy--center {
+        text-align: center;
+    }
+
+    .footer-bottom,
+    .footer-bottom--center {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .footer-bottom span:last-child,
+    .footer-bottom--center span:last-child {
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .controle-hero {
+        min-height: calc(100svh - 82px);
+    }
+
+    .controle-hero__content {
+        padding: 15px 0;
+    }
+
+    .controle-hero__title {
+        font-size: clamp(0.82rem, 4vw, 1.05rem);
+    }
+
+    .controle-hero__offer {
+        width: 96%;
+        max-height: 155px;
+    }
+
+    .controle-hero__actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .controle-hero__button {
+        width: 100%;
+        min-width: 0;
+        padding-inline: 10px;
+    }
+}
+
+/* =========================================================
+   V32 - HOVER LIMPO DOS CARDS DE PLANOS
+   Sem sombra externa escura e sem chapa preta no fundo.
+   Não usa opacity 0. Não depende de JavaScript.
+   ========================================================= */
+
+.nex-plan-card {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: none;
+    transition:
+        transform 0.28s ease,
+        border-color 0.28s ease,
+        background 0.28s ease,
+        filter 0.28s ease;
+}
+
+.nex-plan-card--featured {
+    box-shadow: none;
+}
+
+.nex-plan-card:hover {
+    transform: translateY(-5px) scale(1.004);
+    border-color: rgba(126, 234, 255, 0.78);
+    box-shadow: none;
+    filter: brightness(1.035);
+}
+
+.nex-plan-card:hover .nex-plan-card__topbar {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(126, 234, 255, 0.34),
+            rgba(255, 255, 255, 0.12)
+        );
+}
+
+.nex-plan-card--featured:hover .nex-plan-card__topbar {
+    background: linear-gradient(90deg, #ffd04d, #fff0a8);
+}
+
+.nex-plan-card__cta {
+    box-shadow: 0 8px 18px rgba(0, 24, 92, 0.14);
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        filter 0.22s ease;
+}
+
+.nex-plan-card__cta:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: linear-gradient(180deg, #ffffff, #e8fbff);
+    box-shadow:
+        0 10px 20px rgba(0, 24, 92, 0.16),
+        0 0 14px rgba(87, 236, 255, 0.12);
+    filter: brightness(1.025);
+}
+
+.nex-plan-card__cta:active {
+    transform: translateY(0) scale(0.99);
+}
+
+.nex-plan-card__svas-icons img {
+    transition:
+        transform 0.22s ease,
+        filter 0.22s ease;
+}
+
+.nex-plan-card:hover .nex-plan-card__svas-icons img {
+    transform: translateY(-2px);
+    filter:
+        drop-shadow(0 6px 8px rgba(0, 22, 88, 0.18))
+        drop-shadow(0 0 8px rgba(126, 234, 255, 0.16));
+}
+
+.nex-plans__arrow {
+    transition:
+        transform 0.22s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease,
+        opacity 0.22s ease;
+}
+
+.nex-plans__arrow:hover:not(:disabled) {
+    transform: scale(1.08);
+    background: rgba(8, 126, 209, 0.88);
+    box-shadow:
+        0 10px 22px rgba(0, 54, 138, 0.20),
+        0 0 14px rgba(87, 236, 255, 0.16);
+}
+
+/* =========================================================
+   V33 - ESCONDER SCROLLBAR DO POPUP DE CONTRATAÇÃO
+   Mantém a rolagem funcionando, mas remove a barra aparente.
+   ========================================================= */
+
+.plan-contract-modal__dialog {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.plan-contract-modal__dialog::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+/* =========================================================
+   V35 - BENEFÍCIO GRATUITO DE ENERGIA ELÉTRICA
+   Cards dos planos e opção no popup de contratação.
+   ========================================================= */
+
+.nex-plan-card__energy {
+    margin-top: auto;
+    padding: 13px 14px;
+    border: 1px solid rgba(126, 234, 255, 0.22);
+    border-radius: 17px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(126, 234, 255, 0.16),
+            rgba(5, 64, 158, 0.34)
+        );
+}
+
+.nex-plan-card__energy-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #082f76;
+    background: linear-gradient(180deg, #fff8b9, #ffd34f);
+    box-shadow: 0 0 16px rgba(255, 220, 88, 0.22);
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.nex-plan-card__energy-text {
+    display: block;
+    color: rgba(244, 253, 255, 0.94);
+    font-size: 0.78rem;
+    line-height: 1.32;
+    font-weight: 700;
+}
+
+.nex-plan-card__energy-text strong {
+    color: #fff1a8;
+    font-weight: 900;
+}
+
+.nex-plan-card__price {
+    margin-top: 15px;
+    padding-top: 0;
+}
+
+.nex-plan-card:hover .nex-plan-card__energy {
+    border-color: rgba(255, 232, 123, 0.45);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 220, 88, 0.16),
+            rgba(10, 111, 197, 0.40)
+        );
+}
+
+.plan-contract-energy {
+    padding: 18px;
+    border: 1px solid rgba(255, 232, 123, 0.24);
+    border-radius: 20px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 220, 88, 0.10),
+            rgba(4, 53, 140, 0.30)
+        );
+}
+
+.plan-contract-energy legend {
+    padding: 0 4px;
+}
+
+.plan-contract-energy__text {
+    margin: 0 0 15px;
+    color: rgba(235, 250, 255, 0.82);
+    font-size: 0.86rem;
+    line-height: 1.58;
+}
+
+.plan-contract-energy__option {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.plan-contract-energy__option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.plan-contract-energy__box {
+    min-height: 82px;
+    padding: 15px 16px;
+    border: 1px solid rgba(220, 250, 255, 0.25);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: rgba(4, 53, 140, 0.36);
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.plan-contract-energy__option input:checked + .plan-contract-energy__box {
+    border-color: #ffe17a;
+    background: rgba(18, 145, 211, 0.54);
+    transform: translateY(-2px);
+}
+
+.plan-contract-energy__icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #082f76;
+    background: linear-gradient(180deg, #fff8b9, #ffd34f);
+    box-shadow: 0 0 16px rgba(255, 220, 88, 0.20);
+    font-size: 1.16rem;
+}
+
+.plan-contract-energy__content {
+    min-width: 0;
+}
+
+.plan-contract-energy__content strong,
+.plan-contract-energy__content small {
+    display: block;
+}
+
+.plan-contract-energy__content strong {
+    color: #ffffff;
+    font-size: 0.94rem;
+    line-height: 1.25;
+}
+
+.plan-contract-energy__content small {
+    margin-top: 4px;
+    color: rgba(235, 250, 255, 0.72);
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
+@media (max-width: 580px) {
+    .nex-plan-card__energy {
+        padding: 12px;
+        align-items: flex-start;
+    }
+
+    .nex-plan-card__energy-icon {
+        width: 31px;
+        height: 31px;
+        min-width: 31px;
+        font-size: 1rem;
+    }
+
+    .nex-plan-card__energy-text {
+        font-size: 0.74rem;
+    }
+
+    .plan-contract-energy {
+        padding: 15px;
+    }
+
+    .plan-contract-energy__box {
+        align-items: flex-start;
+    }
+}
+
+/* =========================================================
+   V36 - RESPIRO ENTRE APPS SEM CONSUMIR DADOS E ENERGIA
+   ========================================================= */
+
+.nex-plan-card__svas {
+    margin-bottom: 18px;
+}
+
+/* =========================================================
+   V39 - FOOTER COMPACTO E COMPATÍVEL COM O HTML ATUAL
+   Corrige tanto o footer novo quanto o footer antigo.
+   ========================================================= */
+
+.site-footer {
+    padding: 26px 0 14px !important;
+}
+
+.site-footer .container {
+    width: min(calc(100% - 40px), 1320px) !important;
+}
+
+.site-footer .footer-grid,
+.site-footer .footer-grid.footer-grid--simple {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    width: 100% !important;
+    align-items: center !important;
+}
+
+.site-footer .footer-grid > div:not(:first-child) {
+    display: none !important;
+}
+
+.site-footer .footer-main,
+.site-footer .footer-grid > div:first-child {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    column-gap: 34px !important;
+    text-align: left !important;
+}
+
+.site-footer .footer-brand-main,
+.site-footer .footer-brand {
+    margin: 0 !important;
+}
+
+.site-footer .footer-brand-main {
+    min-width: 230px !important;
+    justify-content: flex-start !important;
+}
+
+.site-footer .footer-brand-main .brand__mark {
+    width: 52px !important;
+    height: 52px !important;
+    flex-basis: 52px !important;
+}
+
+.site-footer .footer-brand-main .brand__name {
+    font-size: 1.72rem !important;
+}
+
+.site-footer .footer-brand {
+    width: 180px !important;
+    max-width: 180px !important;
+}
+
+.site-footer .footer-copy,
+.site-footer .footer-copy.footer-copy--center {
+    max-width: none !important;
+    margin: 0 !important;
+    color: rgba(233, 250, 255, 0.82) !important;
+    font-size: 0.92rem !important;
+    line-height: 1.45 !important;
+    text-align: left !important;
+}
+
+.site-footer .footer-title,
+.site-footer .footer-links {
+    display: none !important;
+}
+
+.site-footer .footer-bottom,
+.site-footer .footer-bottom.footer-bottom--center {
+    margin-top: 22px !important;
+    padding-top: 14px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 24px !important;
+    text-align: left !important;
+}
+
+.site-footer .footer-bottom span,
+.site-footer .footer-bottom.footer-bottom--center span {
+    width: auto !important;
+}
+
+.site-footer .footer-bottom span:last-child,
+.site-footer .footer-bottom.footer-bottom--center span:last-child {
+    text-align: right !important;
+}
+
+@media (max-width: 780px) {
+    .site-footer {
+        padding: 26px 0 16px !important;
+    }
+
+    .site-footer .footer-main,
+    .site-footer .footer-grid > div:first-child {
+        grid-template-columns: 1fr !important;
+        justify-items: center !important;
+        row-gap: 14px !important;
+        text-align: center !important;
+    }
+
+    .site-footer .footer-brand-main {
+        min-width: 0 !important;
+        justify-content: center !important;
+    }
+
+    .site-footer .footer-brand {
+        margin: 0 auto !important;
+    }
+
+    .site-footer .footer-copy,
+    .site-footer .footer-copy.footer-copy--center {
+        text-align: center !important;
+    }
+
+    .site-footer .footer-bottom,
+    .site-footer .footer-bottom.footer-bottom--center {
+        flex-direction: column !important;
+        justify-content: center !important;
+        text-align: center !important;
+        gap: 8px !important;
+    }
+
+    .site-footer .footer-bottom span:last-child,
+    .site-footer .footer-bottom.footer-bottom--center span:last-child {
+        text-align: center !important;
+    }
+}
+
+/* =========================================================
+   V40 - BLOCOS DE BENEFÍCIOS ATL NEX
+   eSIM, chip físico, portabilidade e benefícios gerais.
+   Mantém o mesmo padrão visual dos planos.
+   ========================================================= */
+
+.nex-features {
+    position: relative;
+    padding: 94px 0 88px;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(126, 234, 255, 0.22), transparent 34%),
+        radial-gradient(circle at 82% 0%, rgba(50, 203, 249, 0.20), transparent 34%),
+        linear-gradient(180deg, #075bb9 0%, #064aa8 52%, #053e99 100%);
+}
+
+.nex-features::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 46px 46px;
+}
+
+.nex-features__container {
+    width: min(calc(100% - 40px), 1320px);
+    margin-inline: auto;
+}
+
+.nex-features__header {
+    max-width: 900px;
+    margin: 0 auto 48px;
+    text-align: center;
+}
+
+.nex-features__eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #7ff1ff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+}
+
+.nex-features__title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(2rem, 3.8vw, 3.8rem);
+    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -0.055em;
+}
+
+.nex-features__subtitle {
+    max-width: 780px;
+    margin: 18px auto 0;
+    color: rgba(233, 250, 255, 0.82);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.nex-features__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.nex-feature-card {
+    position: relative;
+    min-height: 360px;
+    padding: 28px;
+    border: 1px solid rgba(190, 242, 255, 0.26);
+    border-radius: 28px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    align-items: flex-start;
+    gap: 20px;
+    background:
+        radial-gradient(circle at 16% 0%, rgba(126, 234, 255, 0.22), transparent 34%),
+        linear-gradient(
+            180deg,
+            rgba(24, 140, 216, 0.28),
+            rgba(6, 47, 130, 0.78)
+        ),
+        #0752b1;
+    box-shadow: none;
+    transform: translateY(0);
+    transition:
+        transform 0.28s ease,
+        border-color 0.28s ease,
+        background 0.28s ease,
+        filter 0.28s ease;
+}
+
+.nex-feature-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 24px 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(126, 234, 255, 0.55),
+        transparent
+    );
+    opacity: 0.55;
+}
+
+.nex-feature-card:hover {
+    transform: translateY(-5px) scale(1.004);
+    border-color: rgba(126, 234, 255, 0.78);
+    filter: brightness(1.035);
+}
+
+.nex-feature-card--highlight {
+    border-color: rgba(98, 237, 255, 0.72);
+    background:
+        radial-gradient(circle at 16% 0%, rgba(126, 234, 255, 0.28), transparent 34%),
+        linear-gradient(
+            180deg,
+            rgba(32, 157, 224, 0.35),
+            rgba(6, 47, 130, 0.78)
+        ),
+        #0752b1;
+}
+
+.nex-feature-card__icon {
+    width: 72px;
+    height: 72px;
+    border: 1px solid rgba(126, 234, 255, 0.38);
+    border-radius: 22px;
+    display: grid;
+    place-items: center;
+    color: #7bf0ff;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(126, 234, 255, 0.18),
+            rgba(4, 53, 140, 0.34)
+        );
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 14px 28px rgba(0, 24, 92, 0.16);
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        background 0.25s ease;
+}
+
+.nex-feature-card:hover .nex-feature-card__icon {
+    transform: translateY(-3px);
+    color: #ffffff;
+    border-color: rgba(126, 234, 255, 0.72);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(126, 234, 255, 0.28),
+            rgba(10, 111, 197, 0.40)
+        );
+}
+
+.nex-feature-card__icon svg {
+    width: 38px;
+    height: 38px;
+    fill: currentColor;
+}
+
+.nex-feature-card__content {
+    min-width: 0;
+}
+
+.nex-feature-card__tag {
+    display: inline-flex;
+    min-height: 28px;
+    padding: 0 12px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(126, 234, 255, 0.25);
+    border-radius: 999px;
+    align-items: center;
+    justify-content: center;
+    color: #7ff1ff;
+    background: rgba(4, 53, 140, 0.28);
+    font-size: 0.70rem;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.nex-feature-card h3 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(1.32rem, 2vw, 1.78rem);
+    line-height: 1.12;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+}
+
+.nex-feature-card p {
+    margin: 14px 0 0;
+    color: rgba(235, 250, 255, 0.82);
+    font-size: 0.94rem;
+    line-height: 1.65;
+}
+
+.nex-feature-card ul {
+    padding: 0;
+    margin: 18px 0 0;
+    display: grid;
+    gap: 10px;
+    list-style: none;
+}
+
+.nex-feature-card li {
+    position: relative;
+    padding-left: 24px;
+    color: rgba(248, 253, 255, 0.92);
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.nex-feature-card li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #7bf0ff;
+    font-weight: 900;
+}
+
+.nex-benefits-strip {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.nex-benefits-strip__item {
+    min-height: 132px;
+    padding: 18px;
+    border: 1px solid rgba(190, 242, 255, 0.22);
+    border-radius: 22px;
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(126, 234, 255, 0.12),
+            rgba(5, 64, 158, 0.32)
+        );
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease,
+        filter 0.25s ease;
+}
+
+.nex-benefits-strip__item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(126, 234, 255, 0.58);
+    filter: brightness(1.03);
+}
+
+.nex-benefits-strip__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #082f76;
+    background: linear-gradient(180deg, #e8fdff, #7eeaff);
+    box-shadow: 0 0 16px rgba(126, 234, 255, 0.18);
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: 900;
+}
+
+.nex-benefits-strip__item:nth-child(2) .nex-benefits-strip__icon {
+    background: linear-gradient(180deg, #fff8b9, #ffd34f);
+    box-shadow: 0 0 16px rgba(255, 220, 88, 0.22);
+}
+
+.nex-benefits-strip__item strong {
+    color: #ffffff;
+    font-size: 0.94rem;
+    line-height: 1.25;
+}
+
+.nex-benefits-strip__item small {
+    color: rgba(235, 250, 255, 0.72);
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.nex-features__actions {
+    margin-top: 34px;
+    display: flex;
+    justify-content: center;
+}
+
+.nex-features__actions .btn {
+    min-width: 220px;
+}
+
+/* Ajuste de ancoragem para header fixo */
+#esim,
+#chip-fisico,
+#portabilidade,
+#beneficios,
+#planos {
+    scroll-margin-top: 105px;
+}
+
+@media (max-width: 980px) {
+    .nex-features {
+        padding: 72px 0 66px;
+    }
+
+    .nex-features__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nex-feature-card {
+        min-height: auto;
+    }
+
+    .nex-benefits-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 580px) {
+    .nex-features {
+        padding: 58px 0 48px;
+    }
+
+    .nex-features__container {
+        width: min(calc(100% - 28px), 1320px);
+    }
+
+    .nex-features__header {
+        margin-bottom: 34px;
+    }
+
+    .nex-features__title {
+        font-size: clamp(1.75rem, 8vw, 2.35rem);
+    }
+
+    .nex-feature-card {
+        padding: 22px 18px;
+        border-radius: 24px;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .nex-feature-card__icon {
+        width: 62px;
+        height: 62px;
+        border-radius: 19px;
+    }
+
+    .nex-feature-card__icon svg {
+        width: 33px;
+        height: 33px;
+    }
+
+    .nex-feature-card h3 {
+        font-size: 1.32rem;
+    }
+
+    .nex-feature-card p {
+        font-size: 0.88rem;
+    }
+
+    .nex-benefits-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .nex-benefits-strip__item {
+        min-height: auto;
+    }
+
+    .nex-features__actions .btn {
+        width: 100%;
+    }
+}

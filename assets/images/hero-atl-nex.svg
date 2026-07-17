@@ -1,0 +1,37 @@
+<svg width="900" height="820" viewBox="0 0 900 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="phone" x1="190" y1="62" x2="704" y2="734"><stop stop-color="#1A779A"/><stop offset=".48" stop-color="#072441"/><stop offset="1" stop-color="#031324"/></linearGradient>
+<linearGradient id="screen" x1="263" y1="144" x2="658" y2="661"><stop stop-color="#23D7F1"/><stop offset=".38" stop-color="#0A658F"/><stop offset="1" stop-color="#06162B"/></linearGradient>
+<linearGradient id="sim" x1="28" y1="410" x2="385" y2="748"><stop stop-color="#13DAF5"/><stop offset=".4" stop-color="#1B6D9A"/><stop offset="1" stop-color="#0B172A"/></linearGradient>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="30" stdDeviation="30" flood-color="#00DDF8" flood-opacity=".25"/></filter>
+</defs>
+<ellipse cx="483" cy="733" rx="290" ry="55" fill="#00DDF8" opacity=".18"/>
+<path d="M660 92C744 158 788 260 782 362C776 468 718 575 624 643" stroke="#35E8FF" stroke-opacity=".45" stroke-width="3"/>
+<path d="M127 222C211 118 359 66 489 86" stroke="#35E8FF" stroke-opacity=".28" stroke-width="3"/>
+<g filter="url(#shadow)">
+<rect x="232" y="55" width="482" height="666" rx="78" fill="url(#phone)" stroke="#53E9FF" stroke-width="4"/>
+<rect x="259" y="94" width="428" height="588" rx="54" fill="url(#screen)"/>
+<rect x="390" y="72" width="167" height="24" rx="12" fill="#020914"/>
+<circle cx="654" cy="84" r="7" fill="#3FEAFF"/>
+<text x="301" y="229" fill="white" font-family="Arial" font-size="23" font-weight="700">ATL NEX</text>
+<text x="301" y="276" fill="#A9F8FF" font-family="Arial" font-size="18">Seu plano conectado</text>
+<rect x="301" y="320" width="344" height="128" rx="28" fill="white" fill-opacity=".12" stroke="white" stroke-opacity=".24"/>
+<text x="330" y="364" fill="white" font-family="Arial" font-size="18">Internet disponível</text>
+<text x="330" y="420" fill="#7CF4FF" font-family="Arial" font-size="48" font-weight="700">58 GB</text>
+<rect x="301" y="478" width="160" height="82" rx="22" fill="white" fill-opacity=".11"/>
+<rect x="485" y="478" width="160" height="82" rx="22" fill="white" fill-opacity=".11"/>
+<text x="330" y="510" fill="white" font-family="Arial" font-size="14">WhatsApp</text>
+<text x="330" y="540" fill="#7CF4FF" font-family="Arial" font-size="17" font-weight="700">INCLUSO</text>
+<text x="514" y="510" fill="white" font-family="Arial" font-size="14">Benefício</text>
+<text x="514" y="540" fill="#7CF4FF" font-family="Arial" font-size="17" font-weight="700">1 APP</text>
+<rect x="301" y="589" width="344" height="54" rx="27" fill="#4BEAFF"/>
+<text x="393" y="624" fill="#03121F" font-family="Arial" font-size="18" font-weight="700">CONECTAR AGORA</text>
+</g>
+<g transform="rotate(-10 215 585)" filter="url(#shadow)">
+<path d="M55 438C55 410 78 387 106 387H342C370 387 393 410 393 438V708C393 736 370 759 342 759H106C78 759 55 736 55 708V438Z" fill="url(#sim)" stroke="#72F2FF" stroke-width="4"/>
+<path d="M294 387H342C370 387 393 410 393 438V486L294 387Z" fill="#0A2339"/>
+<rect x="100" y="438" width="116" height="91" rx="18" fill="#D7BA70"/>
+<path d="M120 438V529M158 438V529M196 438V529M100 468H216M100 499H216" stroke="#745F2C" stroke-width="5"/>
+<text x="102" y="690" fill="white" font-family="Arial" font-size="33" font-weight="700">ATL NEX</text>
+</g>
+</svg>
